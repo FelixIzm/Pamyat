@@ -1,0 +1,11 @@
+Host: pamyat-naroda.ru
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: */*
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Referer: https://pamyat-naroda.ru/
+Cookie: bda88568a54f922fcdfc6dbf940e5d00=emtHeFpxdWFJWGhmSG41XzVXRmhNUVhYWFhYWDE1NzczNzY1NTVZWVlZWVl4OTYwUnpOOWRaWUVxSDdnMVo0ZmVRWFhYWFhYMTU3NzM4MDE1NVlZWVlZWQ; BITRIX_PN_DATALINE_LNG=ru; r=792af96f5e174474907798b6b4a6baf7; _ym_uid=1577370599678069543; _ym_d=1577370599; _ga=GA1.2.86630658.1577370599; _gid=GA1.2.1423321629.1577370599; _ym_isad=2; PNSESSIONID=sNWj7w5zboeEkaXXdaTeCpvOeHGkxzaJ; 56105c9ab348522591eea18fbe4d080b=792af96f5e174474907798b6b4a6baf7
+Pragma: no-cache
+Cache-Control: no-cache
+TE: Trailers

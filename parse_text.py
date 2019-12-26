@@ -1,4 +1,4 @@
-import base64, hashlib
+import base64, hashlib,json
 
 s = """Host: pamyat-naroda.ru
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
@@ -23,20 +23,9 @@ def parse_file (name_file):
         dict_[items[0]] = items[1].lstrip() 
     return dict_
 
-#print(parse_file('header_0.txt'))
+def open_json_file(json_file):
+    with open(json_file) as json_file:
+        data = json.load(json_file)
+        print(data['PNSESSIONID'])
 
-s1='ZUgzZklKeFFyUWNfb1FFX1R1d0Vtd1hYWFhYWDE1NzczNjc2NzJZWVlZWVlmN1lZNzZfNWZKLW4xR0JUdTJ3cW53WFhYWFhYMTU3NzM3MTI3MllZWVlZWQ'
-
-#s += "=" * ((4 - len(s) % 4) % 4)
-#print(s1)
-s3='idBDkFY6IzsNAhe792af96f5e174474907798b6b4a6baf7x7hDwqbFHpAaXcUSy'
-s4= '4107cb9ed160b6220db33d1655cfd055'
-r ='792af96f5e174474907798b6b4a6baf7'
-
-s = r+s4+s3
-s = r+"db76xdlrtxcxcghn7yusxjcdxsbtq1hnicnaspohh5tzbtgqjixzc5nmhybeh"
-
-ddd='83153a0eaa52d09d47a9274bfcb8efcd'
-#bs = base64.b64decode(s).decode()
-#print(bs)
-print(hashlib.md5(s.encode('utf-8')).hexdigest())
+open_json_file('cookie_3.txt')
