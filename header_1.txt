@@ -1,0 +1,10 @@
+Host: pamyat-naroda.ru
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Cookie: PNSESSIONID=F3Fwt2eMn3vtctfJR2YrUYGLYR0dhQx4; bda88568a54f922fcdfc6dbf940e5d00=SlFKM3NjX013QlBGUm1VdWNMWUNPZ1hYWFhYWDE1NzczNzQxOTZZWVlZWVlJMEttdXItVmk4UVBLZG5EbGcwVENBWFhYWFhYMTU3NzM3Nzc5NllZWVlZWQ; BITRIX_PN_DATALINE_LNG=ru; 56105c9ab348522591eea18fbe4d080b=792af96f5e174474907798b6b4a6baf7
+Upgrade-Insecure-Requests: 1
+Pragma: no-cache
+Cache-Control: no-cache
