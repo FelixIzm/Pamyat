@@ -4,5 +4,6 @@ Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
-Cookie: _ga=GA1.2.770534896.1577099369; _ym_uid=15770993691007649153; _ym_d=1577099369; BX_USER_ID=4107cb9ed160b6220db33d1655cfd055; BITRIX_PN_DATALINE_LNG=ru; _gid=GA1.2.1148472317.1577267427; _ym_isad=2
 Upgrade-Insecure-Requests: 1
+Pragma: no-cache
+Cache-Control: no-cache
