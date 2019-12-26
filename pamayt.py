@@ -1,4 +1,4 @@
-import requests, re, hashlib, base64
+import requests, hashlib, base64
 cookies = {}
 headers={}
 
