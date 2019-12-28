@@ -105,7 +105,7 @@ if(res.status_code==307):
         b_bs = bs.split('XXXXXX')[1].split('YYYYYY')[0]
         print(a_bs)
         print(b_bs)
-        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"попов","boost":6}}},{"match":{"last_name":{"query":"попов","operator":"and","boost":7}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"10","from":0}
+        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"попов","boost":6}}},{"match":{"last_name":{"query":"попов","operator":"and","boost":7}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"20","from":0}
         #data = {k: quote(str(v)) for k,v in data.items()}
         #data = quote(data.decode())
         #print(data)
@@ -115,8 +115,11 @@ if(res.status_code==307):
 
         print(url4)
         res4 = requests.post(url4,data=json.dumps(data),headers=headers)
-        data = res4.json
-        print(data['took'])
+        data = json.loads(res4.text)
+        hits = data['hits']['hits']
+        print(type(hits[0]))
+        for key, value in hits[0].items():
+            print (key, value)
         ###############################
         #
         ###############################
