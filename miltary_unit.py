@@ -63,8 +63,8 @@ if(res1.status_code==307):
     cookies[str_PNSESSIONID] = cookie_PNSESSIONID
     cookies['BITRIX_PN_DATALINE_LNG'] = 'ru'
     str_cook = ''
-    for key, value in cookies.items():
-        str_cook += '{0}={1};'.format(key,value)
+    #for key, value in cookies.items():
+    #    str_cook += '{0}={1};'.format(key,value)
     print(str_cook)
 
     headers = parse_file('mu_header2.txt')
@@ -89,6 +89,7 @@ if(res1.status_code==307):
         headers = parse_file('mu_header3.txt')
         headers['Cookie'] = make_str_cookie(cookies)
         headers['Content-Type'] = 'application/json'
+        
         ############## 3-й запрос #############
         url3 = 'https://pamyat-naroda.ru/documents/'
         res3 = requests.get(url3,headers=headers,cookies=cookies)
@@ -129,7 +130,7 @@ if(res1.status_code==307):
         data_ = Template('{"query":{"bool":{"should":[{"bool":{"should":[{"match_phrase":{"document_type":"${para1}"}},{"match_phrase":{"document_type":"${para2}"}},{"match_phrase":{"document_type":"${para3}"}},        {"match_phrase":{"document_type":"${para4}"}},{"match_phrase":{"document_type":"${para5}"}},{"match_phrase":{"document_type":"${para6}"}},{"match_phrase":        {"document_type":"${para7}"}},{"match_phrase":{"document_type":"${para8}"}},{"match_phrase":{"document_type":"${para9}"}},{"match_phrase":        {"document_type":"${para10}"}},{"match_phrase":{"document_type":"${para11}"}},{"match_phrase":{"document_type":"${para12}"}},        {"match_phrase":{"document_type":"${para13}"}},{"match_phrase":{"document_type":"${para14}"}},        {"match_phrase":{"document_type":"${para15}"}},{"match_phrase":{"document_type":"${para16}"}},{"match_phrase":{"document_type":"${para17}"}},        {"match_phrase":{"document_type":"${para18}"}}]}},{"bool":{"should":[{"bool":{"must":[{"range":{"date_from":{"lte":"${finish_date}"}}},{"range":{"date_to":{"gte":"${start_date}"}}}],"boost":3}},{"bool":{"must":[{"range":{"document_date_b":{"lte":"${finish_date}"}}},{"range":{"document_date_f":{"gte":"${start_date}"}}}],"boost":7}}]}},{"bool":{"should":[{"match_phrase":{"authors_list.keyword":{"query":"${military_unit}","boost":50}}},{"match":{"document_name":{"query":"${military_unit}","type":"phrase","boost":30}}},{"match":{"authors":{"query":"${military_unit}","type":"phrase","boost":20}}},{"match":{"army_unit_label.division":{"query":"${military_unit}","type":"phrase","boost":10}}},{"nested":{"path":"page_magazine","query":{"bool":{"must":[{"match":{"page_magazine.podrs":{"query":"${military_unit}","type":"phrase"}}},{"range":{"page_magazine.date_from":{"lte":"${finish_date}"}}},{"range":{"page_magazine.date_to":{"gte":"${start_date}"}}}]}},"boost":4}}]}}],"minimum_should_match":3}},"_source":["id","document_type","document_number","document_date_b","document_date_f","document_name","archive","fond","opis","delo","date_from","date_to","authors","geo_names","operation_name","secr","image_path","delo_id","deal_type","operation_name"],"size":10,"from":0}')
         data_ = data_.safe_substitute(para1 = para1,para2 = para2,para3 = para3,para4 = para4,para5 = para5,para6 = para6,para7 = para7,para8 = para8,para9 = para9,para10 = para10,para11 = para11,para12 = para12,para13 = para13,para14 = para14,para15 = para15,para16 = para16,para17 = para17,para18 = para18,start_date='1945-1-1',finish_date='1945-5-31', military_unit=urllib.parse.quote('147 сд'))
         #data_ = urllib.parse.quote(data_)
-        print(data_)
+        #print(data_)
 
         url4 = 'https://cdn.pamyat-naroda.ru/data/'+a_bs+'/'+b_bs+'/pamyat/document,map,magazine/_search'
         print(url4)
