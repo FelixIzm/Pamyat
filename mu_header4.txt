@@ -4,7 +4,6 @@ Accept: application/json, text/javascript, */*; q=0.01
 Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
 Accept-Encoding: gzip, deflate, br
 Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-Content-Length: 2419
 Origin: https://pamyat-naroda.ru
 Connection: keep-alive
 Referer: https://pamyat-naroda.ru/documents/
