@@ -150,4 +150,5 @@ if(res1.status_code==307):
             f.write('</table></html>')
             f.close()
 exit(0)
-
+#https://pamyat-naroda.ru/documents/view/?id=132241172&backurl=division%5C1256%20%D0%B3%D0%B0%D0%BF::begin_date%5C01.05.1945::end_date%5C31.05.1945::use_main_string%5Ctrue::group%5Call::types%5Copersvodki:rasporyajeniya:otcheti:peregovori:jbd:direktivi:prikazi:posnatovleniya:dokladi:raporti:doneseniya:svedeniya:plani:plani_operaciy:karti:shemi:spravki:drugie&date_from=01.05.1945&date_to=31.05.1945&division=1256%20%D0%B3%D0%B0%D0%BF#
+#https://cdn.pamyat-naroda.ru/imageloadfull/Передача_057_КП097Р_С45/236-0002673-2731/00000002.jpg
