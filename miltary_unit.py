@@ -9,7 +9,7 @@ headers={}
 str_00 = 'bda88568a54f922fcdfc6dbf940e5d00'
 str_0b = '56105c9ab348522591eea18fbe4d080b'
 str_PNSESSIONID = 'PNSESSIONID'
-military_unit = '1256 гап'
+military_unit = '179 габр'
 
 #####################################        
 def parse_file (name_file):
@@ -145,7 +145,9 @@ if(res1.status_code==307):
                 hits = data['hits']['hits']
                 for hit in hits:
                     src = hit['_source']
-                    data_string = table_string.safe_substitute(col1=src['document_type'],col2=src['document_name'],col3=src['date_from']+'-'+src['date_to'],col4=src['authors'],col5=src['document_date_f'],col6=src['archive'],col7=src['fond'],col8=src['delo'],col9=src['opis'],col10='<a href=https://cdn.pamyat-naroda.ru/imageloadfull/'+src['image_path']+'>Скан</a>')
+                    data_string = table_string.safe_substitute(col1=src['document_type'],col2=src['document_name'],col3=src['date_from']+'-'+src['date_to'],col4=src['authors'],col5=src['document_date_f'],col6=src['archive'],col7=src['fond'],col8=src['delo'],col9=src['opis'],
+                    #col10='<a href=https://cdn.pamyat-naroda.ru/imageloadfull/'+src['image_path']+'>Скан</a>')
+                    col10='<input value="scan" onclick="window.open(\'https://cdn.pamyat-naroda.ru/imageloadfull/'+ src['image_path']+'\')" type="button">')
                     f.write(data_string)
             f.write('</table></html>')
             f.close()
