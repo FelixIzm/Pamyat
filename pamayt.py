@@ -34,8 +34,8 @@ def make_str_cookie(cookies):
 
 headers = parse_file('header_0.txt')
 cookies = parse_file('cookie_0.txt')
-family = 'попов'
-s = requests.Session()
+family = 'кухлий'
+#s = requests.Session()
 url = 'https://pamyat-naroda.ru/'
 # Первый запрос - получаем 307 статус
 res = requests.get(url, allow_redirects=False)
@@ -105,7 +105,7 @@ if(res.status_code==307):
         b_bs = bs.split('XXXXXX')[1].split('YYYYYY')[0]
         print(a_bs)
         print(b_bs)
-        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"попов","boost":6}}},{"match":{"last_name":{"query":"попов","operator":"and","boost":7}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"попов","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"20","from":0}
+        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"кухлий","boost":6}}},{"match":{"last_name":{"query":"кухлий","operator":"and","boost":7}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"20","from":0}
         #data = {k: quote(str(v)) for k,v in data.items()}
         #data = quote(data.decode())
         #print(data)
@@ -118,9 +118,10 @@ if(res.status_code==307):
         data = json.loads(res4.text)
         hits = data['hits']['hits']
         print(type(hits[0]))
-        for key, value in hits[0].items():
-            print (key, value)
-        ###############################
+        print(hits[0].get('_source').get('__type'))
+        #for key, value in hits[0].items():
+        #    print (key, value)
+        ################################
         #
         ###############################
 
