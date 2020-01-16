@@ -1,5 +1,5 @@
-import requests, hashlib, base64, json, pprint
-import urllib.parse 
+import requests, hashlib, base64, json, pprint, csv
+import urllib.parse
 
 cookies = {}
 headers={}
@@ -8,7 +8,7 @@ str_00 = 'bda88568a54f922fcdfc6dbf940e5d00'
 str_0b = '56105c9ab348522591eea18fbe4d080b'
 str_PNSESSIONID = 'PNSESSIONID'
 
-#####################################        
+#####################################
 def parse_file (name_file):
     dict_ = {}
     f = open(name_file, 'r')
@@ -17,24 +17,24 @@ def parse_file (name_file):
     list_ = s.splitlines()
     for item in list_:
         items = item.split(":")
-        dict_[items[0]] = items[1].lstrip() 
+        dict_[items[0]] = items[1].lstrip()
     return dict_
-#####################################        
+#####################################
 def parse_json_file(json_file):
     with open(json_file) as json_file:
         return json.load(json_file)
-#####################################        
+#####################################
 def make_str_cookie(cookies):
     str_cook = ''
     for key, value in cookies.items():
         str_cook += '{0}={1};'.format(key,value)
     return str_cook
-#####################################        
+#####################################
 
 
 headers = parse_file('header_0.txt')
 cookies = parse_file('cookie_0.txt')
-family = 'кухлий'
+family = u"кухлий"
 #s = requests.Session()
 url = 'https://pamyat-naroda.ru/'
 # Первый запрос - получаем 307 статус
@@ -73,13 +73,13 @@ if(res.status_code==307):
         #pprint.pprint(res1.cookies)
         #for item in res1.cookies.items():
         #    print(item)
-        
+
         cookies = parse_json_file('cookie_3_4.txt')
         cookies[str_00] = res1.cookies[str_00]
         cookies[str_0b] = res.cookies[str_0b]
         cookies[str_PNSESSIONID] = res.cookies[str_PNSESSIONID]
         cookies['r'] = res.cookies[str_0b]
-        
+
         headers = parse_file('header_3_4.txt')
         headers['Cookie'] = make_str_cookie(cookies)
         headers['Content-Type'] = 'application/json'
@@ -105,7 +105,7 @@ if(res.status_code==307):
         b_bs = bs.split('XXXXXX')[1].split('YYYYYY')[0]
         print(a_bs)
         print(b_bs)
-        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"кухлий","boost":6}}},{"match":{"last_name":{"query":"кухлий","operator":"and","boost":7}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"20","from":0}
+        data = {"query":{"bool":{"should":[{"bool":{"should":[{"match":{"last_name":{"query":"кухлий","boost":6}}},{"match":{"last_name":{"query":"кухлий","operator":"and","boost":7}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","boost":9}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","operator":"and","boost":10}}},{"match":{"last_name":{"query":"кухлий","analyzer":"standard","fuzziness":2}}}]}}],"minimum_should_match":1}},"indices_boost":[{"memorial":1},{"podvig":2},{"pamyat":3}],"size":"4000","from":0}
         #data = {k: quote(str(v)) for k,v in data.items()}
         #data = quote(data.decode())
         #print(data)
@@ -117,15 +117,45 @@ if(res.status_code==307):
         res4 = requests.post(url4,data=json.dumps(data),headers=headers)
         data = json.loads(res4.text)
         hits = data['hits']['hits']
+        dict_data = []
+        for x in hits:
+            j = {}
+            j['Картотека'] = x.get('_source').get('entity','')
+            try:
+                j['ФИО'] = x.get('_source','').get('last_name','')+' '+x.get('_source','').get('first_name','')+' '+x.get('_source','').get('middle_name','')
+            except Exception as e:
+                print(x)
+                raise 
+            j['Фамилия'] = x.get('_source').get('last_name','')
+            j['Имя'] = x.get('_source').get('first_name','')
+            j['Отчество'] = x.get('_source').get('middle_name','')
+            j['Дата рождения'] = x.get('_source').get('date_birth','')
+            j['Звание'] = x.get('_source').get('rank','')
+            j['Место рождения'] = x.get('_source').get('place_birth','')
+            j['Место призыва'] = x.get('_source').get('mesto_priziva','')
+            j['Док'] = 'https://pamyat-naroda.ru/heroes/podvig-'+x.get('_type','')+x.get('_id','')
+
+
+            dict_data.append(j)
         print(type(hits[0]))
-        print(hits[0].get('_source').get('__type'))
-        #for key, value in hits[0].items():
-        #    print (key, value)
+        print(hits[1].get('_source').get('__type'))
+        for key, value in hits[1].items():
+            print (key, value)
         ################################
         #
         ###############################
+csv_columns = ['Картотека','ФИО','Фамилия','Имя','Отчество','Дата рождения','Звание','Место рождения','Место призыва','Док']
+#dict_data = [
+#{'ФИО': 1, 'Фамилия': 'Alex', 'Имя': 'India'},
+#]
+csv_file = "Names.csv"
+try:
+    with open(csv_file, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+        writer.writeheader()
+        for data in dict_data:
+            writer.writerow(data)
+except IOError:
+    print("I/O error")
 
-        exit(0)
-
-
-
+exit(0)
